@@ -124,6 +124,11 @@ public class Runner implements Runnable {
 		}
 		System.out.println(this);
 		System.out.println(s);
+		if (printSettingsAsPythonCode) {
+			System.out.println("----- Python code starts -----");
+			System.out.println(s.printSettingsAsPythonCode());
+			System.out.println("----- Python code ends -----");
+		}
 
 		ProgressBar pb = null;
 		try {
@@ -216,5 +221,10 @@ public class Runner implements Runnable {
 	private boolean useProgressBarIfPossible = true;
 	public void setUseProgressBar(boolean newState) {
 		useProgressBarIfPossible = newState;
+	}
+
+	private boolean printSettingsAsPythonCode = false;
+	public void setPrintSettingsAsPythonCode(boolean newState) {
+		printSettingsAsPythonCode = newState;
 	}
 }

@@ -121,6 +121,33 @@ public class Simulator {
 				"\n  CREATE_MASTODON_CENTER_SPOT: " + CREATE_MASTODON_CENTER_SPOT;
 	}
 
+	public String printSettingsAsPythonCode() {
+		return "from org.mastodon.mamut.simulator import SimulationConfig" +
+				"\nfrom org.mastodon.mamut.simulator import AgentNamingPolicy" +
+				"\nfrom org.mastodon.mamut.simulator import Agent2dMovesRestriction" +
+				"\nsim_cfg = SimulationConfig()" +
+				"\nsim_cfg.AGENT_INITIAL_RADIUS = " + AGENT_INITIAL_RADIUS +
+				"\nsim_cfg.AGENT_LOOK_AROUND_DISTANCE = " + AGENT_LOOK_AROUND_DISTANCE +
+				"\nsim_cfg.AGENT_MIN_DISTANCE_TO_ANOTHER_AGENT = " + AGENT_MIN_DISTANCE_TO_ANOTHER_AGENT +
+				"\nsim_cfg.AGENT_USUAL_STEP_SIZE = " + AGENT_USUAL_STEP_SIZE +
+				"\nsim_cfg.AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE = " + AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE +
+				"\nsim_cfg.AGENT_DO_2D_MOVES_ONLY = Agent2dMovesRestriction." + AGENT_DO_2D_MOVES_ONLY +
+				"\nsim_cfg.AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION = " + AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION +
+				"\nsim_cfg.AGENT_MAX_LIFESPAN_AND_DIES_AFTER = " + AGENT_MAX_LIFESPAN_AND_DIES_AFTER +
+				"\nsim_cfg.AGENT_MAX_DENSITY_TO_ENABLE_DIVISION = " + AGENT_MAX_DENSITY_TO_ENABLE_DIVISION +
+				"\nsim_cfg.AGENT_MAX_VARIABILITY_OF_DIVISION_PLANES = " + AGENT_MAX_VARIABILITY_OF_DIVISION_PLANES +
+				"\nsim_cfg.AGENT_DAUGHTERS_INITIAL_DISTANCE = " + AGENT_DAUGHTERS_INITIAL_DISTANCE +
+				"\nsim_cfg.AGENT_DAUGHTERS_DOZERING_DISTANCE = " + AGENT_DAUGHTERS_DOZERING_DISTANCE +
+				"\nsim_cfg.AGENT_DAUGHTERS_DOZERING_TIME_PERIOD = " + AGENT_DAUGHTERS_DOZERING_TIME_PERIOD +
+				"\nsim_cfg.LABELS_NAMING_POLICY = AgentNamingPolicy." + LABELS_NAMING_POLICY +
+				"\nsim_cfg.COLLECT_INTERNAL_DATA = " + (COLLECT_INTERNAL_DATA ? "True":"False") +
+				"\nsim_cfg.VERBOSE_AGENT_DEBUG = " + (VERBOSE_AGENT_DEBUG ? "True":"False") +
+				"\nsim_cfg.VERBOSE_SIMULATOR_DEBUG = " + (VERBOSE_SIMULATOR_DEBUG ? "True":"False") +
+				"\nsim_cfg.CREATE_MASTODON_CENTER_SPOT = " + (CREATE_MASTODON_CENTER_SPOT ? "True":"False") +
+				"\n#r = Runner(....)" +
+				"\n#r.changeConfigTo(sim_cfg)";
+	}
+
 
 	private int assignedIds = 0;
 	private int time = 0;
