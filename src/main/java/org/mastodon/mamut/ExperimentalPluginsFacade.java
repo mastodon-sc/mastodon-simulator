@@ -60,14 +60,14 @@ import org.mastodon.mamut.spots.PlaceSpotsInSpotVolume;
 public class ExperimentalPluginsFacade extends AbstractContextual implements MamutPlugin
 {
 	//"IDs" of all plug-ins wrapped in this class
-	private static final String EXP_SHIFTSPOTS = "[vexp] shift spots";
-	private static final String EXP_DUPLICATESPOTS = "[vexp] duplicate spots";
-	private static final String EXP_PLANEROTATESPOTS = "[vexp] in plane rotate spots";
-	private static final String EXP_GENROTATESPOTS = "[vexp] general rotate spots";
-	private static final String EXP_LINEAGECOLORIZER = "[vexp] random color tags";
-	private static final String EXP_SURFACESPOTS = "[vexp] place surface spots";
-	private static final String EXP_VOLUMESPOTS = "[vexp] place volume spots";
-	private static final String EXP_SIMULATOR = "[vexp] simulator";
+	private static final String EXP_SHIFTSPOTS = "[msim] shift spots";
+	private static final String EXP_DUPLICATESPOTS = "[msim] duplicate spots";
+	private static final String EXP_PLANEROTATESPOTS = "[msim] in plane rotate spots";
+	private static final String EXP_GENROTATESPOTS = "[msim] general rotate spots";
+	private static final String EXP_LINEAGECOLORIZER = "[msim] random color tags";
+	private static final String EXP_SURFACESPOTS = "[msim] place surface spots";
+	private static final String EXP_VOLUMESPOTS = "[msim] place volume spots";
+	private static final String EXP_SIMULATOR = "[msim] simulator";
 
 	private static final String[] EXP_SHIFTSPOTS_KEYS = { "not mapped" };
 	private static final String[] EXP_DUPLICATESPOTS_KEYS = { "not mapped" };
@@ -83,13 +83,13 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 	private static final Map< String, String > menuTexts = new HashMap<>();
 	static
 	{
-		menuTexts.put( EXP_SHIFTSPOTS, "Shift Spots" );
-		menuTexts.put( EXP_DUPLICATESPOTS, "Duplicate Spots" );
-		menuTexts.put( EXP_PLANEROTATESPOTS, "Rotate Spots (In Plane)" );
-		menuTexts.put( EXP_GENROTATESPOTS, "Rotate Spots (General)" );
-		menuTexts.put( EXP_LINEAGECOLORIZER, "Random Color Lineages" );
-		menuTexts.put( EXP_SURFACESPOTS, "Create Surface Spots" );
-		menuTexts.put( EXP_VOLUMESPOTS, "Create Volume Spots" );
+		menuTexts.put( EXP_SHIFTSPOTS, "Translate spots in space and time" );
+		menuTexts.put( EXP_DUPLICATESPOTS, "Duplicate spots" );
+		menuTexts.put( EXP_PLANEROTATESPOTS, "Rotate spots in 2D" );
+		menuTexts.put( EXP_GENROTATESPOTS, "Rotate spots in 3D" );
+		menuTexts.put( EXP_SURFACESPOTS, "Add spots on selected spot surface" );
+		menuTexts.put( EXP_VOLUMESPOTS, "Add spots into selected spot interior" );
+		menuTexts.put( EXP_LINEAGECOLORIZER, "Add or use tag set to highlight lineage trees" );
 		menuTexts.put( EXP_SIMULATOR, "Simulator" );
 	}
 	@Override
@@ -103,13 +103,15 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 				menu( "Tags",
 					item( EXP_LINEAGECOLORIZER )
 				),
-				menu( "Spots Shuffling",
-					item( EXP_SHIFTSPOTS ),
-					item( EXP_DUPLICATESPOTS ),
-					item( EXP_PLANEROTATESPOTS ),
-					item( EXP_GENROTATESPOTS ),
-					item( EXP_SURFACESPOTS ),
-					item( EXP_VOLUMESPOTS )
+				menu( "Spots management",
+					menu( "Spots shuffling (Simulator)",
+						item( EXP_SHIFTSPOTS ),
+						item( EXP_DUPLICATESPOTS ),
+						item( EXP_PLANEROTATESPOTS ),
+						item( EXP_GENROTATESPOTS ),
+						item( EXP_SURFACESPOTS ),
+						item( EXP_VOLUMESPOTS )
+					)
 				),
 				item( EXP_SIMULATOR )
 			)
@@ -128,14 +130,14 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 		@Override
 		public void getCommandDescriptions( final CommandDescriptions descriptions )
 		{
-			descriptions.add(EXP_SHIFTSPOTS, EXP_SHIFTSPOTS_KEYS, "Scale and translate spots coordinates in both spatial and temporal domains.");
-			descriptions.add(EXP_DUPLICATESPOTS, EXP_DUPLICATESPOTS_KEYS, "Clone spots into multiple other time points.");
-			descriptions.add(EXP_PLANEROTATESPOTS, EXP_PLANEROTATESPOTS_KEYS, "Rotate spots in spatial domain, in a simply-given plane.");
-			descriptions.add(EXP_GENROTATESPOTS, EXP_GENROTATESPOTS_KEYS, "Rotate spots in spatial domain, in a very general way.");
+			descriptions.add(EXP_SHIFTSPOTS, EXP_SHIFTSPOTS_KEYS, "Scale spots and translate them by a defined offset in both spatial and temporal domains.");
+			descriptions.add(EXP_DUPLICATESPOTS, EXP_DUPLICATESPOTS_KEYS, "Create identical copies of selected or specified spots across multiple time points. Clone spots into multiple other time points.");
+			descriptions.add(EXP_PLANEROTATESPOTS, EXP_PLANEROTATESPOTS_KEYS, "Rotate spots in spatial domain around chosen axis, resulting in a 2D rotation.");
+			descriptions.add(EXP_GENROTATESPOTS, EXP_GENROTATESPOTS_KEYS, "Apply a general 3D spatial rotation to selected spots.");
+			descriptions.add(EXP_SURFACESPOTS, EXP_SURFACESPOTS_KEYS, "Generate a surface layer of spots around a selected spot.");
+			descriptions.add(EXP_VOLUMESPOTS, EXP_VOLUMESPOTS_KEYS, "Fill a 3D volume of a selected spot with regularly distributed spots.");
 			descriptions.add(EXP_LINEAGECOLORIZER, EXP_LINEAGECOLORIZER_KEYS, "Assign to every lineage tree a randomly chosen color from the selected tag set.");
-			descriptions.add(EXP_SURFACESPOTS, EXP_SURFACESPOTS_KEYS, "Places spots on a surface of a larger selected spot.");
-			descriptions.add(EXP_VOLUMESPOTS, EXP_VOLUMESPOTS_KEYS, "Places spots into a volume of a larger selected spot.");
-			descriptions.add(EXP_SIMULATOR, EXP_SIMULATOR_KEYS, "Creates a new random cell lineage.");
+			descriptions.add(EXP_SIMULATOR, EXP_SIMULATOR_KEYS, "Generates a new random cell lineage.");
 		}
 	}
 	//------------------------------------------------------------------------
