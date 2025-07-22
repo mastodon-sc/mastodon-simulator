@@ -49,7 +49,7 @@ import org.mastodon.mamut.util.NumberSequenceHandler;
 public class DuplicateSpots implements Command {
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	private final String selectionInfoMsg = "...also only selected ones.";
+	private final String selectionInfoMsg = "Duplicate all spots if none is selected, or only the selected ones.";
 
 	@Parameter(label = "Select spots from this time point:")
 	int sourceTimePoint = 0;

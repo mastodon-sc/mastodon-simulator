@@ -52,7 +52,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class RotateSpotsGeneral implements Command {
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	private final String selectionInfoMsg = "...also only selected ones.";
+	private final String selectionInfoMsg = "Rotate all spots if none is selected, or only the selected ones.";
 
 	@Parameter(label = "Source coordinate system, time point: ",
 			callback = "checkTimePoints")

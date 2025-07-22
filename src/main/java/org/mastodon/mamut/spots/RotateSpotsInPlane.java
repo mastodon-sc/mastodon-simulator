@@ -42,7 +42,7 @@ import org.scijava.plugin.Plugin;
 public class RotateSpotsInPlane implements Command {
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	private final String selectionInfoMsg = "...also only selected ones.";
+	private final String selectionInfoMsg = "Rotate all spots if none is selected, or only the selected ones.";
 
 	@Parameter(label = "Coordinate system at time point: ",
 			callback = "checkTimePoints")

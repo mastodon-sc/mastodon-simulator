@@ -49,25 +49,25 @@ import org.scijava.plugin.Plugin;
 public class ShiftSpots implements Command {
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	private final String selectionInfoMsg = "...also only selected ones.";
+	private final String selectionInfoMsg = "Translates all spots if none is selected, or only the selected ones.";
 
-	@Parameter
+	@Parameter(label = "Multiply x-coord by:")
 	double multiply_x = 1;
-	@Parameter
+	@Parameter(label = "Multiply y-coord by:")
 	double multiply_y = 1;
-	@Parameter
+	@Parameter(label = "Multiply z-coord by:")
 	double multiply_z = 1;
 
-	@Parameter
+	@Parameter(label = "Add to x-coord:")
 	double delta_x = 0;
-	@Parameter
+	@Parameter(label = "Add to y-coord:")
 	double delta_y = 0;
-	@Parameter
+	@Parameter(label = "Add to z-coord:")
 	double delta_z = 0;
 
-	@Parameter(min = "1")
+	@Parameter(label = "Multiply time-coordinate by:", min = "1")
 	int multiply_t = 1;
-	@Parameter
+	@Parameter(label = "Add to time-coordinate:")
 	int delta_t = 0;
 
 	@Parameter(persist = false)

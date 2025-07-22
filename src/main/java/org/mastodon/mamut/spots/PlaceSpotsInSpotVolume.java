@@ -48,7 +48,7 @@ import java.util.Random;
 public class PlaceSpotsInSpotVolume implements Command {
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	private final String selectionInfoMsg = "...of ONLY selected spots.";
+	private final String selectionInfoMsg = "At least one spot must be selected.";
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
 	private final String msg1 = "The created spots take the name from their source spot.";
