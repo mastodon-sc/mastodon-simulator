@@ -12,67 +12,92 @@ import org.mastodon.mamut.simulator.SimulationConfig;
 @Plugin(type = Command.class)
 public class SimulatorAdvancedDlg implements Command {
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep1 = "----------- Simulation debug -----------";
+	final String sep1 = "----------- Simulation Debug Options -----------";
 
+	/* makes it not visible, yet settable from script or command line (not from GUI as Fiji won't show it)
 	@Parameter(description = "Spots labels can be either 'M' or can be encoding the lineage history, also optionally with debug hints _B,_W,_BW.",
 		choices = { "Lineage encoding labels (1aabba...)",
 		            "Prepend hints B_,W_,BW_ to encoding labels",
 		            "Append hints _B,_W,_BW to encoding labels",
 		            "Always 'M' (no lineage encoding)" })
+	*/
+	@Parameter(required = false, visibility = ItemVisibility.INVISIBLE)
 	String LABELS_NAMING_POLICY = "Lineage";
 
-	@Parameter(description = "Collect internal status info per every Agent. If not, may speed up the simulation as no extra data will be stored.")
+	@Parameter(label = "Collect internal data:",
+	           description = "COLLECT_INTERNAL_DATA: Collect internal status info per every Agent. If not, may speed up the simulation as no extra data will be stored.")
 	boolean COLLECT_INTERNAL_DATA = Simulator.COLLECT_INTERNAL_DATA;
 
-	@Parameter(description = "Prints a lot of data to understand decisions making of the agents.")
+	@Parameter(label = "Verbose debug outputs from agents:",
+	           description = "VERBOSE_AGENT_DEBUG: Prints a lot of data to understand decisions making of the agents.")
 	boolean VERBOSE_AGENT_DEBUG = Simulator.VERBOSE_AGENT_DEBUG;
 
-	@Parameter(description = "Prints relative little reports about what the simulation framework was asked to do.")
+	@Parameter(label = "Verbose debug outputs from simulator:",
+	           description = "VERBOSE_SIMULATOR_DEBUG: Prints relative little reports about what the simulation framework was asked to do.")
 	boolean VERBOSE_SIMULATOR_DEBUG = Simulator.VERBOSE_SIMULATOR_DEBUG;
 
-	@Parameter(description = "Produce a \"lineage\" that stays in the geometric centre of the generated data.")
+	@Parameter(label = "Each time point, add centre spot of agents:",
+	           description = "CREATE_MASTODON_CENTER_SPOT: Produce a \"lineage\" that stays in the geometric centre of the generated data.")
 	boolean CREATE_MASTODON_CENTER_SPOT = Simulator.CREATE_MASTODON_CENTER_SPOT;
 
-	@Parameter(description = "Using this radius the new spots are introduced into the simulation.")
+	@Parameter(visibility = ItemVisibility.MESSAGE)
+	final String sep2a = "----------- Agent Spot Size -----------";
+
+	@Parameter(label = "Initial agent radius:",
+	           description = "AGENT_INITIAL_RADIUS: Using this radius the new spots are introduced into the simulation.")
 	double AGENT_INITIAL_RADIUS = Simulator.AGENT_INITIAL_RADIUS;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep2 = "----------- Agents mobility -----------";
+	final String sep2 = "----------- Agents Mobility Parameters -----------";
 
-	@Parameter(description = "How far around shall an agent look for \"nearby\" agents to consider their positions for its own development.")
+	@Parameter(label = "Look-around distance:",
+	           description = "AGENT_LOOK_AROUND_DISTANCE: How far an agent \"sees\" to explore nearby space, to consider nearby agents positions for its own development.")
 	double AGENT_LOOK_AROUND_DISTANCE = Simulator.AGENT_LOOK_AROUND_DISTANCE;
 
-	@Parameter(description = "How close two agents can come before they start repelling each other.")
+	@Parameter(label = "Min distance to other agents:",
+	           description = "AGENT_MIN_DISTANCE_TO_ANOTHER_AGENT: How close two agents can come before they start repelling each other.")
 	double AGENT_MIN_DISTANCE_TO_ANOTHER_AGENT = Simulator.AGENT_MIN_DISTANCE_TO_ANOTHER_AGENT;
 
-	@Parameter(description = "How far an agent can move between time points.")
+	@Parameter(label = "Usual step size (movement distance):",
+	           description = "AGENT_USUAL_STEP_SIZE: How far an agent can move between time points.")
 	double AGENT_USUAL_STEP_SIZE = Simulator.AGENT_USUAL_STEP_SIZE;
 
-	@Parameter(description = "How many attempts is an agent (cell) allowed to try to move randomly until it finds an non-colliding position.")
+	@Parameter(label = "Max attempts to make a move:",
+	           description = "AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE: How many attempts is an agent (cell) allowed to try to move randomly until it finds a non-colliding position.")
 	int AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE = Simulator.AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep3 = "----------- Agents life-cycle -----------";
+	final String sep3 = "----------- Agents Life-cycle Parameters -----------";
 
-	@Parameter(description = "The mean life span of an agent (cell). Shorter means divisions occurs more often. 15%-down-rounded of the lifespan is a period just prior a division when mother cell slows down.")
+	@Parameter(label = "Average lifespan before division:",
+	           description = "AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION: The mean life span of an agent (cell). Shorter means divisions occurs more often. 15%-down-rounded of the lifespan is a period just prior a division when mother cell slows down.")
 	int AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION = Simulator.AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION;
 
-	@Parameter(description = "Hard limit on the life span of an agent (cell). The cell dies, is removed from the simulation, whenever it's life exceeded this value.")
+	@Parameter(label = "Max lifespan (dies after):",
+	           description = "AGENT_MAX_LIFESPAN_AND_DIES_AFTER: Hard limit on the life span of an agent (cell). The cell dies, is removed from the simulation, whenever it's life exceeded this value.")
 	int AGENT_MAX_LIFESPAN_AND_DIES_AFTER = Simulator.AGENT_MAX_LIFESPAN_AND_DIES_AFTER;
 
-	@Parameter(description = "The maximum number of neighbors tolerated for a division to occur; if more neighbors are around, the system believes the space is too condensed and doesn't permit agents (cells) to divide.")
+	@Parameter(label = "Max local density to allow division:",
+	           description = "AGENT_MAX_DENSITY_TO_ENABLE_DIVISION: The maximum number of neighbors tolerated for a division to occur; if more neighbors are around, the system believes the space is too condensed and doesn't permit agents (cells) to divide.")
 	int AGENT_MAX_DENSITY_TO_ENABLE_DIVISION = Simulator.AGENT_MAX_DENSITY_TO_ENABLE_DIVISION;
 
-	@Parameter(description = "Given the last division direction (dozering direction) of a mother cell, daughters will divide in a new, random division direction such that the angle between the two division directions is not more than this.")
+	@Parameter(label = "Max variability of division planes:",
+	           description = "AGENT_MAX_VARIABILITY_OF_DIVISION_PLANES: Given the last division direction (dozering direction) of a mother cell, daughters will divide in a new, random division direction such that the angle between the two division directions is not more than this.")
 	double AGENT_MAX_VARIABILITY_OF_DIVISION_PLANES = Simulator.AGENT_MAX_VARIABILITY_OF_DIVISION_PLANES;
 
-	@Parameter(description = "Freshly \"born\" daughters are placed exactly this distance apart from one another.")
+	@Parameter(visibility = ItemVisibility.MESSAGE)
+	final String sep3b = "----------- Offspring Agents Settings -----------";
+
+	@Parameter(label = "Initial distance after division:",
+	           description = "AGENT_DAUGHTERS_INITIAL_DISTANCE: Freshly \"born\" daughters are placed exactly this distance apart from one another.")
 	double AGENT_DAUGHTERS_INITIAL_DISTANCE = Simulator.AGENT_DAUGHTERS_INITIAL_DISTANCE;
 
-	@Parameter(description = "After the two daughters are born, they translate away from each other from their INITIAL_DISTANCE to AGENT_DAUGHTERS_DOZERING_DISTANCE for this number of time points.")
+	@Parameter(label = "Dozering (repulsion) distance:",
+	           description = "AGENT_DAUGHTERS_DOZERING_DISTANCE: Distance over which newly divided agents are pushed apart. Two daughters translate away from their INITIAL_DISTANCE to AGENT_DAUGHTERS_DOZERING_DISTANCE for this number of time points.")
 	double AGENT_DAUGHTERS_DOZERING_DISTANCE = Simulator.AGENT_DAUGHTERS_DOZERING_DISTANCE;
 
-	@Parameter(description = "After the two daughters are born, they translate away from each other from their INITIAL_DISTANCE to AGENT_DAUGHTERS_DOZERING_DISTANCE for this number of time points, during this the daughters are influenced only by surrounding-and-overlapping agents, but the surrounding agents are influenced by these daughters normally (so the influence is asymmetrical).")
+	@Parameter(label = "Dozering time period:",
+	           description = "AGENT_DAUGHTERS_DOZERING_TIME_PERIOD: Number of time points during which newly divided agents push apart; in this period the daughters are influenced only by surrounding-and-overlapping agents, but the surrounding agents are influenced by these daughters normally (so the influence is asymmetrical).")
 	int AGENT_DAUGHTERS_DOZERING_TIME_PERIOD = Simulator.AGENT_DAUGHTERS_DOZERING_TIME_PERIOD;
 
 	@Parameter
