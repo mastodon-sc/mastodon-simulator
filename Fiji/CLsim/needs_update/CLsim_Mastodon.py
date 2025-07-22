@@ -1,110 +1,75 @@
-#@File initialMastodonProjectFile
 #@Context ctx
+#@File initialMastodonProjectFile
 
 from org.mastodon.mamut import MainWindow
 from org.mastodon.mamut.io import ProjectLoader
 from org.mastodon.mamut.simulator.ui import Runner
 from org.mastodon.mamut.simulator import SimulationConfig
 from org.mastodon.mamut.simulator import AgentNamingPolicy
+from org.mastodon.mamut.simulator import Agent2dMovesRestriction
 
-# loads the Mastodon project and shows the Mastodon app
-projectModel = ProjectLoader.open(initialMastodonProjectFile.toString(),ctx,True,True)
+# Loads the Mastodon project and shows the Mastodon app.
+projectModel = ProjectLoader.open(initialMastodonProjectFile.toString(), ctx, True, True)
 MainWindow(projectModel).setVisible(True)
 
+# Possibly adjusts the simulation configuration from the default configuration.
+# (This is an optional step.)
+sim_cfg = SimulationConfig()
 
-# adjusts the simulation configuration (that's an optional step)
-simCfg = SimulationConfig()
+# --------------------- own configuration ---------------------
+# For example:
+# Spots labels can be either 'M', or can be encoding the lineage history, also optionally with debug hints _B,_W,_BW.
+sim_cfg.LABELS_NAMING_POLICY = AgentNamingPolicy.USE_ALWAYS_M                   # Always 'M' (no lineage encoding)
+sim_cfg.LABELS_NAMING_POLICY = AgentNamingPolicy.ENCODING_LABELS                # Lineage encoding labels (1aabba...)
+sim_cfg.LABELS_NAMING_POLICY = AgentNamingPolicy.ENCODING_LABELS_AND_PREPENDING # Prepend hints B_,W_,BW_ to encoding labels
+sim_cfg.LABELS_NAMING_POLICY = AgentNamingPolicy.ENCODING_LABELS_AND_APPENDING  # Append hints _B,_W,_BW to encoding labels
+# (The "appending of _B,_W,_BW" will be carried out as this was the last assignment command.)
 
-# docs and default parameters:
-# ============================
+# Or, new spots, that are introduced into Mastodon, got this radius (size):
+sim_cfg.AGENT_INITIAL_RADIUS = 1.5
 
-# Spots labels can be either 'M' or can be encoding the lineage history, also optionally with debug hints _B,_W,_BW.
-simCfg.LABELS_NAMING_POLICY = AgentNamingPolicy.USE_ALWAYS_M
-simCfg.LABELS_NAMING_POLICY = AgentNamingPolicy.ENCODING_LABELS
-simCfg.LABELS_NAMING_POLICY = AgentNamingPolicy.ENCODING_LABELS_AND_PREPENDING
-simCfg.LABELS_NAMING_POLICY = AgentNamingPolicy.ENCODING_LABELS_AND_APPENDING
-
-# Collect internal status info per every Agent. If not, may speed up the simulation as no extra data will be stored.
-simCfg.COLLECT_INTERNAL_DATA = False
-
-# Prints a lot of data to understand decisions making of the agents.
-simCfg.VERBOSE_AGENT_DEBUG = False
-
-# Prints relative little reports about what the simulation framework was asked to do.
-simCfg.VERBOSE_SIMULATOR_DEBUG = False
-
-# How far around shall an agent look for \"nearby\" agents to consider them for overlaps.
-simCfg.AGENT_SEARCH_RADIUS = 4.2
-
-# How close two agents can come before they are considered overlapping.
-simCfg.AGENT_MIN_DISTANCE_TO_ANOTHER_AGENT = 3.2
-
-# How far an agent can move between time points.
-simCfg.AGENT_USUAL_STEP_SIZE = 1.0
-
-# How many attempts is an agent (cell) allowed to try to move randomly until it finds an non-colliding position.
-simCfg.AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE = 6
-
-# The mean life span of an agent (cell). Shorted means divisions occurs more often.
-simCfg.AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION = 10
-
-# Hard limit on the life span of an agent (cell). The cell dies, is removed from the simulation, whenever it's life exceeded this value.
-simCfg.AGENT_MAX_LIFESPAN_AND_DIES_AFTER = 30
-
-# The maximum number of neighbors tolerated for a division to occur; if more neighbors are around, the system believes the space is too condensed and doesn't permit agents (cells) to divide.
-simCfg.AGENT_MAX_DENSITY_TO_ENABLE_DIVISION = 2
-
-# Given the last move of a mother cell, project it onto an xy-plane, one can then imagine a perpendicular line in the xy-plane. A division line in the xy-plane is randomly picked such that it does not coincide by larger angle with that perpendicular line, and this random line would be a \"division\" orientation for the x,y coords, the z-coord is randomized.
-simCfg.AGENT_MAX_VARIABILITY_FROM_A_PERPENDICULAR_DIVISION_PLANE = 2.35
-
-# Freshly \"born\" daughters are placed exactly this distance apart from one another.
-simCfg.AGENT_DAUGHTERS_INITIAL_DISTANCE = 1.6
-
-# Using this radius the new spots are introduced into Mastodon.
-simCfg.MASTODON_SPOT_RADIUS = 1.5
-
-# Produce a \"lineage\" that stays in the geometric centre of the generated data.
-simCfg.MASTODON_CENTER_SPOT = False
-
-# Controls if the agents are allowed to move in z-axis at all.
-simCfg.AGENT_DO_2D_MOVES_ONLY = True
+# Or, this controls if the agents are allowed to move in z-axis at all.
+sim_cfg.AGENT_DO_2D_MOVES_ONLY = Agent2dMovesRestriction.NO_Z_AXIS_MOVE  #does 2D in XY
+# Btw, there are other options: NO_X_AXIS_MOVE, NO_Y_AXIS_MOVE, NO_RESTRICTION (does 3D)
 
 
+# For a complete list, refer to the Java source code in the file:
+# repository/src/main/java/org/mastodon/mamut/simulator/Simulator.java
+# lines 23 till 72, the beginning of the class Simulator
+# --------------------- own configuration ---------------------
 
-# now override some of the params with my own
-# ============================
-simCfg.AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION = 7
-simCfg.MASTODON_CENTER_SPOT = True
 
-
-# simulates into this existing Mastodon app,
-# assumes empty project and in any case starts from timepoint = 0
-
-# provide own number of cells and length of this simulation run
+# Now, let's simulate into the just-opened Mastodon app, assuming the loaded
+# project is empty and thus:
+# ...provide own number of cells and length of this simulation run
 noOfCells = 10
 noOfTimepoints = 80
 
-r = Runner(projectModel,noOfCells,noOfTimepoints)
-r.changeConfigTo(simCfg)
-r.run()
-
-# simulates again into the very same existing Mastodon app,
-# but here the Runner will run simulation from the last non-empty timpoint,
-# thus continuing on where the last run ended;
-# continues with the same config, which has been further adjusted
-
-# provide own number of cells and length of this simulation run
-noOfTimepoints = 80
-
-r = Runner(projectModel,noOfTimepoints)
-simCfg.AGENT_DO_2D_MOVES_ONLY = False
-r.changeConfigTo(simCfg)
+# ...start the simulation (from time point = 0 which is an implicit setting in this API)
+r = Runner(projectModel, noOfCells, noOfTimepoints)
+r.changeConfigTo(sim_cfg)
 r.run()
 
 
-# if one wants a third stage of the simulation, the last pattern shall be put here, e.g.:
-# noOfTimepoints = 20
-# r = Runner(projectModel,noOfTimepoints)
-# simCfg.AGENT_DO_2D_MOVES_ONLY = False
-# r.changeConfigTo(simCfg)
-# r.run()
+# Let's simulate again into the very same existing Mastodon app, but
+# now the Runner will run simulation from the last non-empty time point.
+# It will thus continue where the previous run has ended.
+#
+# Continue also with the same simulation config, with the following changes,
+# for example:
+sim_cfg.AGENT_DO_2D_MOVES_ONLY = Agent2dMovesRestriction.NO_RESTRICTION
+sim_cfg.AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION = int(sim_cfg.AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION * 1.5)
+# NB: the example above slows down the growth rate by 50%
+
+# Also a new length of the simulation run:
+noOfTimepoints = 90
+
+r = Runner(projectModel, -1, noOfTimepoints)
+r.changeConfigTo(sim_cfg)
+r.run()
+
+#... and this pattern can continue...
+
+# Note that the simulator will not save the created outcome, user must click
+# the "Save" menu item explicitly in the opened Mastodon app.
+

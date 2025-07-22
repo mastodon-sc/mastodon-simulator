@@ -1,5 +1,6 @@
-#@File initialMastodonProjectFile
 #@Context ctx
+#@File initialMastodonProjectFile
+
 #@int numberOfTimepoints
 #@int numberOfSpotsPerTimepoint
 #@boolean doLinkSpots
@@ -9,9 +10,12 @@
 
 from org.mastodon.mamut import MainWindow
 from org.mastodon.mamut.io import ProjectLoader
-from org.mastodon.mamut.simulator import NonSenseDataGenerator
+from org.mastodon.mamut.util import NonSenseDataGenerator
 
-# loads the Mastodon project and shows the Mastodon app
-projectModel = ProjectLoader.open(initialMastodonProjectFile.toString(),ctx,True,True)
+# Loads the Mastodon project and shows the Mastodon app.
+projectModel = ProjectLoader.open(initialMastodonProjectFile.toString(), ctx, True, True)
 MainWindow(projectModel).setVisible(True)
+
+# Runs the spots generator...
 NonSenseDataGenerator(projectModel, numberOfTimepoints, numberOfSpotsPerTimepoint, doLinkSpots, reportFromRound, reportEveryNthRound)
+
