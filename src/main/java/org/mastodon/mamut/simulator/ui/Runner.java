@@ -25,6 +25,9 @@ public class Runner implements Runnable {
 	private final int timeTill;
 	private SimulationConfig simConfig = null;
 
+	/** Provides a brief report about how this Runner has been started (created). */
+	private final String startupCommentary;
+
 	/** intended for when full Mastodon is around, starts from the beginning */
 	public Runner(final ProjectModel projectModel,
 	              final short numberOfCells,
@@ -34,6 +37,10 @@ public class Runner implements Runnable {
 		this.initialNumberOfCells = Math.max(numberOfCells,1);
 		this.timeFrom = projectModel.getMinTimepoint();
 		this.timeTill = Math.min(timeFrom+timepoints, projectModel.getMaxTimepoint());
+
+		this.startupCommentary = "Starting from inside a running Mastodon project -- not explicitly saving the result." +
+				"\nStarting with seeded "+this.initialNumberOfCells+" agents at time point "+this.timeFrom +
+				", simulation runs until time point "+this.timeTill+".";
 	}
 
 	/** intended for when full Mastodon is around, starts from the last time point */
@@ -52,6 +59,10 @@ public class Runner implements Runnable {
 					System.out.println("Found last non-empty time point "+time);
 					this.timeFrom = time;
 					this.timeTill = Math.min(timeFrom+timepoints, projectModel.getMaxTimepoint());
+
+					this.startupCommentary = "Starting from inside a running Mastodon project -- not explicitly saving the result." +
+							"\nStarting from existing spots discovered at time point "+this.timeFrom +
+							", simulation runs until time point "+this.timeTill+".";
 					return;
 				}
 			}
@@ -61,6 +72,10 @@ public class Runner implements Runnable {
 		System.out.println("Given this time point "+fromThisTimepoint);
 		this.timeFrom = fromThisTimepoint;
 		this.timeTill = Math.min(timeFrom+timepoints, projectModel.getMaxTimepoint());
+
+		this.startupCommentary = "Starting from inside a running Mastodon project -- not explicitly saving the result." +
+				"\nStarting from existing spots at given time point "+this.timeFrom +
+				", simulation runs until time point "+this.timeTill+".";
 	}
 
 	/** intended for starts from a command line, from the very beginning */
@@ -80,10 +95,25 @@ public class Runner implements Runnable {
 		this.initialNumberOfCells = Math.max(numberOfCells,1);
 		this.timeFrom = 0;
 		this.timeTill = timepoints;
+
+		this.startupCommentary = "Starting a new Mastodon project: "+this.outputProjectFilename +
+				"\nStarting with seeded "+this.initialNumberOfCells+" agents at time point "+this.timeFrom +
+				", simulation runs until time point "+this.timeTill+".";
 	}
 
 	public void changeConfigTo(final SimulationConfig c) {
 		this.simConfig = c;
+	}
+
+	@Override
+	public String toString() {
+		if (this.snapshotsTimepoints.isEmpty()) {
+			return this.startupCommentary +
+					"\nNo saving of snapshots.";
+		} else {
+			return this.startupCommentary +
+					"\nSaving snapshots at "+this.snapshotsTimepoints+" into: "+this.snapshotsPath;
+		}
 	}
 
 	@Override
@@ -92,6 +122,7 @@ public class Runner implements Runnable {
 		if (simConfig != null) {
 			Simulator.setParamsFromConfig(simConfig);
 		}
+		System.out.println(this);
 		System.out.println(s);
 
 		ProgressBar pb = null;
