@@ -9,6 +9,7 @@ import org.mastodon.mamut.model.Spot;
 import org.mastodon.mamut.model.Link;
 import org.mastodon.spatial.SpatialIndex;
 import org.mastodon.model.SelectionModel;
+import org.mastodon.mamut.simulator.ui.SimulatorAdvancedDlg;
 
 import java.util.Iterator;
 import java.util.List;
@@ -94,20 +95,29 @@ public class Simulator {
 
 	@Override
 	public String toString() {
-		return "Simulation parameters:\n" + "  LABELS_NAMING_POLICY: " + LABELS_NAMING_POLICY +
+		return "Simulation parameters:" +
+				"\n  " + SimulatorAdvancedDlg.HEADER1 +
+				"\n  AGENT_INITIAL_RADIUS: " + AGENT_INITIAL_RADIUS +
+				"\n  " + SimulatorAdvancedDlg.HEADER2 +
 				"\n  AGENT_LOOK_AROUND_DISTANCE: " + AGENT_LOOK_AROUND_DISTANCE +
 				"\n  AGENT_MIN_DISTANCE_TO_ANOTHER_AGENT: " + AGENT_MIN_DISTANCE_TO_ANOTHER_AGENT +
 				"\n  AGENT_USUAL_STEP_SIZE: " + AGENT_USUAL_STEP_SIZE +
 				"\n  AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE: " + AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE +
 				"\n  AGENT_DO_2D_MOVES_ONLY: " + AGENT_DO_2D_MOVES_ONLY +
+				"\n  " + SimulatorAdvancedDlg.HEADER3 +
 				"\n  AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION: " + AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION +
 				"\n  AGENT_MAX_LIFESPAN_AND_DIES_AFTER: " + AGENT_MAX_LIFESPAN_AND_DIES_AFTER +
 				"\n  AGENT_MAX_DENSITY_TO_ENABLE_DIVISION: " + AGENT_MAX_DENSITY_TO_ENABLE_DIVISION +
 				"\n  AGENT_MAX_VARIABILITY_OF_DIVISION_PLANES: " + AGENT_MAX_VARIABILITY_OF_DIVISION_PLANES +
+				"\n  " + SimulatorAdvancedDlg.HEADER4 +
 				"\n  AGENT_DAUGHTERS_INITIAL_DISTANCE: " + AGENT_DAUGHTERS_INITIAL_DISTANCE +
 				"\n  AGENT_DAUGHTERS_DOZERING_DISTANCE: " + AGENT_DAUGHTERS_DOZERING_DISTANCE +
 				"\n  AGENT_DAUGHTERS_DOZERING_TIME_PERIOD: " + AGENT_DAUGHTERS_DOZERING_TIME_PERIOD +
-				"\n  AGENT_INITIAL_RADIUS: " + AGENT_INITIAL_RADIUS +
+				"\n  " + SimulatorAdvancedDlg.HEADER5 +
+				"\n  LABELS_NAMING_POLICY: " + LABELS_NAMING_POLICY +
+				"\n  COLLECT_INTERNAL_DATA: " + COLLECT_INTERNAL_DATA +
+				"\n  VERBOSE_AGENT_DEBUG: " + VERBOSE_AGENT_DEBUG +
+				"\n  VERBOSE_SIMULATOR_DEBUG: " + VERBOSE_SIMULATOR_DEBUG +
 				"\n  CREATE_MASTODON_CENTER_SPOT: " + CREATE_MASTODON_CENTER_SPOT;
 	}
 
