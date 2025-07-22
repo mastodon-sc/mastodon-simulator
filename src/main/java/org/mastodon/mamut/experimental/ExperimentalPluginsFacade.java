@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.mastodon.app.ui.ViewMenuBuilder;
-import org.mastodon.benchmark.BenchmarkScijavaGui;
 import org.mastodon.mamut.KeyConfigScopes;
 import org.mastodon.mamut.experimental.spots.RotateSpotsGeneral;
 import org.mastodon.mamut.experimental.spots.RotateSpotsInPlane;
@@ -71,7 +70,6 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 	private static final String EXP_SURFACESPOTS = "[vexp] place surface spots";
 	private static final String EXP_VOLUMESPOTS = "[vexp] place volume spots";
 	private static final String EXP_SIMULATOR = "[vexp] simulator";
-	private static final String EXP_BENCHMARK = "[vexp] benchmark";
 
 	private static final String[] EXP_SHIFTSPOTS_KEYS = { "not mapped" };
 	private static final String[] EXP_DUPLICATESPOTS_KEYS = { "not mapped" };
@@ -81,7 +79,6 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 	private static final String[] EXP_SURFACESPOTS_KEYS = { "not mapped" };
 	private static final String[] EXP_VOLUMESPOTS_KEYS = { "not mapped" };
 	private static final String[] EXP_SIMULATOR_KEYS = { "not mapped" };
-	private static final String[] EXP_BENCHMARK_KEYS = { "not mapped" };
 	//------------------------------------------------------------------------
 
 	/** titles of this plug-in's menu items */
@@ -96,7 +93,6 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 		menuTexts.put( EXP_SURFACESPOTS, "Create Surface Spots" );
 		menuTexts.put( EXP_VOLUMESPOTS, "Create Volume Spots" );
 		menuTexts.put( EXP_SIMULATOR, "Simulator" );
-		menuTexts.put( EXP_BENCHMARK, "BENCHMARK" );
 	}
 	@Override
 	public Map< String, String > getMenuTexts() { return menuTexts; }
@@ -117,8 +113,7 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 					item( EXP_SURFACESPOTS ),
 					item( EXP_VOLUMESPOTS )
 				),
-				item( EXP_SIMULATOR ),
-				item( EXP_BENCHMARK )
+				item( EXP_SIMULATOR )
 			)
 		);
 	}
@@ -143,7 +138,6 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 			descriptions.add(EXP_SURFACESPOTS, EXP_SURFACESPOTS_KEYS, "Places spots on a surface of a larger selected spot.");
 			descriptions.add(EXP_VOLUMESPOTS, EXP_VOLUMESPOTS_KEYS, "Places spots into a volume of a larger selected spot.");
 			descriptions.add(EXP_SIMULATOR, EXP_SIMULATOR_KEYS, "Creates a new random cell lineage.");
-			descriptions.add(EXP_BENCHMARK, EXP_BENCHMARK_KEYS, "Runs suite of tests to benchmark the Mastodon data rendering/visualization pipelines.");
 		}
 	}
 	//------------------------------------------------------------------------
@@ -157,7 +151,6 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 	private final AbstractNamedAction actionSurfaceSpots;
 	private final AbstractNamedAction actionVolumeSpots;
 	private final AbstractNamedAction actionSimulator;
-	private final AbstractNamedAction actionBenchmark;
 
 	/** reference to the currently available project in Mastodon */
 	private ProjectModel pluginAppModel;
@@ -173,7 +166,6 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 		actionSurfaceSpots = new RunnableAction(EXP_SURFACESPOTS, this::spotsOnSurface);
 		actionVolumeSpots = new RunnableAction(EXP_VOLUMESPOTS, this::spotsInVolume);
 		actionSimulator = new RunnableAction(EXP_SIMULATOR, this::simulator);
-		actionBenchmark = new RunnableAction(EXP_BENCHMARK, this::benchmark);
 		updateEnabledActions();
 	}
 
@@ -189,7 +181,6 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 		actions.namedAction(actionSurfaceSpots, EXP_SURFACESPOTS_KEYS);
 		actions.namedAction(actionVolumeSpots, EXP_VOLUMESPOTS_KEYS);
 		actions.namedAction(actionSimulator, EXP_SIMULATOR_KEYS);
-		actions.namedAction(actionBenchmark, EXP_BENCHMARK_KEYS);
 	}
 
 	/** learn about the current project's params */
@@ -212,7 +203,6 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 		actionSurfaceSpots.setEnabled( pluginAppModel != null );
 		actionVolumeSpots.setEnabled( pluginAppModel != null );
 		actionSimulator.setEnabled( pluginAppModel != null );
-		actionBenchmark.setEnabled( pluginAppModel != null );
 	}
 	//------------------------------------------------------------------------
 	//------------------------------------------------------------------------
@@ -275,14 +265,6 @@ public class ExperimentalPluginsFacade extends AbstractContextual implements Mam
 	private void spotsInVolume() {
 		this.getContext().getService(CommandService.class).run(
 			PlaceSpotsInSpotVolume.class, true,
-			"projectModel", pluginAppModel
-		);
-	}
-
-	private void benchmark() {
-		this.getContext().getService(CommandService.class).run(
-			BenchmarkScijavaGui.class, true,
-			"mastodonProjectPath", "just don't show this item",
 			"projectModel", pluginAppModel
 		);
 	}
