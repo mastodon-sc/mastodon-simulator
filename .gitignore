@@ -1,1 +1,25 @@
+/target/
+/samples/
+doc/
+
+.classpath
+.project
+.settings/
+*.ucls
+*.iml
+.idea/
+
+debug.yaml
+
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+
+# Windows
+*.bak
+
+# Apple
+.DS_Store
+
+# vim swap files
 .*.sw*
