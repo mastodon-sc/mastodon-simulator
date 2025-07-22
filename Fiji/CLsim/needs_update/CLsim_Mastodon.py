@@ -3,9 +3,9 @@
 
 from org.mastodon.mamut import MainWindow
 from org.mastodon.mamut.io import ProjectLoader
-from org.ulman.simulator.ui import Runner
-from org.ulman.simulator import SimulationConfig
-from org.ulman.simulator import AgentNamingPolicy
+from org.mastodon.mamut.simulator.ui import Runner
+from org.mastodon.mamut.simulator import SimulationConfig
+from org.mastodon.mamut.simulator import AgentNamingPolicy
 
 # loads the Mastodon project and shows the Mastodon app
 projectModel = ProjectLoader.open(initialMastodonProjectFile.toString(),ctx,True,True)

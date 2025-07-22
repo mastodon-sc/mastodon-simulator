@@ -9,7 +9,7 @@
 
 from org.mastodon.mamut import MainWindow
 from org.mastodon.mamut.io import ProjectLoader
-from org.ulman.simulator import NonSenseDataGenerator
+from org.mastodon.mamut.simulator import NonSenseDataGenerator
 
 # loads the Mastodon project and shows the Mastodon app
 projectModel = ProjectLoader.open(initialMastodonProjectFile.toString(),ctx,True,True)

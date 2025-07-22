@@ -1,4 +1,4 @@
-package org.ulman.simulator;
+package org.mastodon.mamut.simulator;
 
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.util.Util;

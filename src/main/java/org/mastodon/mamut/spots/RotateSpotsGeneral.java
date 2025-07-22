@@ -25,7 +25,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.mastodon.mamut.experimental.spots;
+package org.mastodon.mamut.spots;
 
 import net.imglib2.RealLocalizable;
 import net.imglib2.RealPoint;
@@ -33,7 +33,7 @@ import org.joml.Vector3f;
 import org.mastodon.collection.RefCollections;
 import org.mastodon.collection.RefSet;
 import org.mastodon.mamut.ProjectModel;
-import org.mastodon.mamut.experimental.spots.util.SpotsRotator;
+import org.mastodon.mamut.spots.util.SpotsRotator;
 import org.mastodon.mamut.model.Spot;
 import org.scijava.ItemVisibility;
 import org.scijava.command.Command;
@@ -45,7 +45,7 @@ import org.scijava.plugin.Plugin;
 import java.util.Set;
 import java.util.HashSet;
 import java.text.ParseException;
-import org.ulman.util.NumberSequenceHandler;
+import org.mastodon.mamut.util.NumberSequenceHandler;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Plugin( type = Command.class, name = "General-rotate spots in space" )

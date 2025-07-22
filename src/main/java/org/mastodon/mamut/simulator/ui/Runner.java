@@ -1,4 +1,4 @@
-package org.ulman.simulator.ui;
+package org.mastodon.mamut.simulator.ui;
 
 import net.imagej.ImageJ;
 import org.mastodon.mamut.ProjectModel;
@@ -8,8 +8,8 @@ import org.mastodon.mamut.model.Model;
 import org.mastodon.mamut.model.Spot;
 import org.mastodon.spatial.SpatialIndex;
 import org.mastodon.views.bdv.SharedBigDataViewerData;
-import org.ulman.simulator.SimulationConfig;
-import org.ulman.simulator.Simulator;
+import org.mastodon.mamut.simulator.SimulationConfig;
+import org.mastodon.mamut.simulator.Simulator;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;

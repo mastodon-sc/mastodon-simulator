@@ -1,4 +1,4 @@
-package org.ulman.simulator;
+package org.mastodon.mamut.simulator;
 
 import org.mastodon.mamut.model.Spot;
 

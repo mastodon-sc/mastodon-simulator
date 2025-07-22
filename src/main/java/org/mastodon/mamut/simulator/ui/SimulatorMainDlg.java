@@ -1,4 +1,4 @@
-package org.ulman.simulator.ui;
+package org.mastodon.mamut.simulator.ui;
 
 import net.imagej.ImageJ;
 import org.mastodon.mamut.MainWindow;
@@ -13,9 +13,9 @@ import org.scijava.log.LogService;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 import org.scijava.prefs.PrefService;
-import org.ulman.simulator.Simulator;
-import org.ulman.simulator.Agent2dMovesRestriction;
-import org.ulman.util.NumberSequenceHandler;
+import org.mastodon.mamut.simulator.Simulator;
+import org.mastodon.mamut.simulator.Agent2dMovesRestriction;
+import org.mastodon.mamut.util.NumberSequenceHandler;
 import javax.swing.WindowConstants;
 import java.nio.file.Files;
 import java.nio.file.Path;

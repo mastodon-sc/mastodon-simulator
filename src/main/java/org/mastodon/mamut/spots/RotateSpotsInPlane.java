@@ -25,12 +25,12 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.mastodon.mamut.experimental.spots;
+package org.mastodon.mamut.spots;
 
 import net.imglib2.RealPoint;
 import org.joml.Vector3f;
 import org.mastodon.mamut.ProjectModel;
-import org.mastodon.mamut.experimental.spots.util.SpotsRotator;
+import org.mastodon.mamut.spots.util.SpotsRotator;
 import org.scijava.ItemVisibility;
 import org.scijava.command.Command;
 import org.scijava.log.LogService;

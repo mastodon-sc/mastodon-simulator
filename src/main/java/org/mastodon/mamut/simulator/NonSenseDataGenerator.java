@@ -1,10 +1,9 @@
-package org.ulman.simulator;
+package org.mastodon.mamut.simulator;
 
 import org.mastodon.mamut.ProjectModel;
 import org.mastodon.mamut.model.ModelGraph;
 import org.mastodon.mamut.model.Spot;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.Random;
 
 public class NonSenseDataGenerator {
 	public NonSenseDataGenerator(final ProjectModel projectModel,

@@ -1,4 +1,4 @@
-package org.mastodon.mamut.experimental.spots.util;
+package org.mastodon.mamut.spots.util;
 
 import org.mastodon.mamut.ProjectModel;
 import org.mastodon.mamut.model.Link;
@@ -6,7 +6,6 @@ import org.mastodon.mamut.model.Spot;
 import org.mastodon.model.tag.ObjTagMap;
 import org.mastodon.model.tag.TagSetModel;
 import org.mastodon.model.tag.TagSetStructure;
-import org.mastodon.model.tag.ui.TagSetDialog;
 
 public class CopyTagsBetweenSpots {
 	private TagSetModel<Spot, Link> tagSetModel;

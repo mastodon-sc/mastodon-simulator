@@ -25,7 +25,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.mastodon.mamut.experimental.trees;
+package org.mastodon.mamut.trees;
 
 import org.mastodon.mamut.ProjectModel;
 import org.mastodon.mamut.model.Spot;

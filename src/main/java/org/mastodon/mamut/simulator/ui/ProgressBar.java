@@ -1,4 +1,4 @@
-package org.ulman.simulator.ui;
+package org.mastodon.mamut.simulator.ui;
 
 import javax.swing.*;
 import java.awt.*;

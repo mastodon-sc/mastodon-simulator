@@ -25,12 +25,12 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.mastodon.mamut.experimental.spots;
+package org.mastodon.mamut.spots;
 
 import org.mastodon.mamut.ProjectModel;
 import org.mastodon.mamut.model.ModelGraph;
 import org.mastodon.mamut.model.Spot;
-import org.mastodon.mamut.experimental.spots.util.CopyTagsBetweenSpots;
+import org.mastodon.mamut.spots.util.CopyTagsBetweenSpots;
 
 import java.util.Iterator;
 import java.util.Set;

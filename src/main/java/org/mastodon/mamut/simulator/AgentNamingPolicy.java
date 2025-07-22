@@ -1,4 +1,4 @@
-package org.ulman.simulator;
+package org.mastodon.mamut.simulator;
 
 public enum AgentNamingPolicy {
 	ENCODING_LABELS,

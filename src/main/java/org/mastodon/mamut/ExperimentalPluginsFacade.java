@@ -25,7 +25,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.mastodon.mamut.experimental;
+package org.mastodon.mamut;
 
 import static org.mastodon.app.ui.ViewMenuBuilder.item;
 import static org.mastodon.app.ui.ViewMenuBuilder.menu;
@@ -36,14 +36,12 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.mastodon.app.ui.ViewMenuBuilder;
-import org.mastodon.mamut.KeyConfigScopes;
-import org.mastodon.mamut.experimental.spots.RotateSpotsGeneral;
-import org.mastodon.mamut.experimental.spots.RotateSpotsInPlane;
-import org.mastodon.mamut.experimental.spots.ShiftSpots;
-import org.mastodon.mamut.experimental.spots.DuplicateSpots;
-import org.mastodon.mamut.experimental.trees.LineageRandomColorizer;
+import org.mastodon.mamut.spots.RotateSpotsGeneral;
+import org.mastodon.mamut.spots.RotateSpotsInPlane;
+import org.mastodon.mamut.spots.ShiftSpots;
+import org.mastodon.mamut.spots.DuplicateSpots;
+import org.mastodon.mamut.trees.LineageRandomColorizer;
 import org.mastodon.mamut.plugin.MamutPlugin;
-import org.mastodon.mamut.ProjectModel;
 import org.scijava.ui.behaviour.io.gui.CommandDescriptionProvider;
 import org.scijava.ui.behaviour.io.gui.CommandDescriptions;
 import org.mastodon.ui.keymap.KeyConfigContexts;
@@ -54,9 +52,9 @@ import org.scijava.plugin.Plugin;
 import org.scijava.ui.behaviour.util.Actions;
 import org.scijava.ui.behaviour.util.AbstractNamedAction;
 import org.scijava.ui.behaviour.util.RunnableAction;
-import org.ulman.simulator.ui.SimulatorMainDlg;
-import org.mastodon.mamut.experimental.spots.PlaceSpotsOnSpotSurface;
-import org.mastodon.mamut.experimental.spots.PlaceSpotsInSpotVolume;
+import org.mastodon.mamut.simulator.ui.SimulatorMainDlg;
+import org.mastodon.mamut.spots.PlaceSpotsOnSpotSurface;
+import org.mastodon.mamut.spots.PlaceSpotsInSpotVolume;
 
 @Plugin( type = MamutPlugin.class )
 public class ExperimentalPluginsFacade extends AbstractContextual implements MamutPlugin

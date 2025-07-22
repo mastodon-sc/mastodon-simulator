@@ -1,13 +1,13 @@
-package org.ulman.simulator.ui;
+package org.mastodon.mamut.simulator.ui;
 
 import org.scijava.ItemVisibility;
 import org.scijava.command.Command;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 import org.scijava.prefs.PrefService;
-import org.ulman.simulator.Simulator;
-import org.ulman.simulator.AgentNamingPolicy;
-import org.ulman.simulator.SimulationConfig;
+import org.mastodon.mamut.simulator.Simulator;
+import org.mastodon.mamut.simulator.AgentNamingPolicy;
+import org.mastodon.mamut.simulator.SimulationConfig;
 
 @Plugin(type = Command.class)
 public class SimulatorAdvancedDlg implements Command {

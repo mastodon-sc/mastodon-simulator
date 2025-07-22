@@ -1,4 +1,4 @@
-package org.ulman.simulator;
+package org.mastodon.mamut.simulator;
 
 public enum Agent2dMovesRestriction {
 	NO_RESTRICTION, //does 3D

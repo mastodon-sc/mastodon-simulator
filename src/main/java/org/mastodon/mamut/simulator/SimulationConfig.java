@@ -1,4 +1,4 @@
-package org.ulman.simulator;
+package org.mastodon.mamut.simulator;
 
 public class SimulationConfig {
 	public AgentNamingPolicy LABELS_NAMING_POLICY = Simulator.LABELS_NAMING_POLICY;

@@ -55,7 +55,7 @@
  *
  ******************************************************************************/
 
-package org.mastodon.mamut.experimental.spots.util;
+package org.mastodon.mamut.spots.util;
 
 /**
  *  The {@code GaussianElimination} data type provides methods
