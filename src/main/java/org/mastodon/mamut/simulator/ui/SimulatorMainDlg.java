@@ -89,7 +89,9 @@ public class SimulatorMainDlg implements Command {
 	public void run() {
 		if (showAdvancedDlg) {
 			//the advanced dialog will set some more params and will come back to this.runInsideMastodon()
-			commandService.run(SimulatorAdvancedDlg.class,true, "basicDialog",this);
+			commandService.run(SimulatorAdvancedDlg.class,true,
+					  "basicDialog",this,
+					  "LABELS_NAMING_POLICY", "Lineage"); //to make sure that item will not show itself
 			return;
 		} else {
 			//retrieve (and set) the params that the advanced dialog would have set...
