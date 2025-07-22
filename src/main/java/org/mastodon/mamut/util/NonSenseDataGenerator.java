@@ -1,10 +1,18 @@
-package org.mastodon.mamut.simulator;
+package org.mastodon.mamut.util;
 
 import org.mastodon.mamut.ProjectModel;
 import org.mastodon.mamut.model.ModelGraph;
 import org.mastodon.mamut.model.Spot;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * This class was supposed to generate data of a certain shapes,
+ * and otherwise without any other requirement. Especially, the
+ * resulting lineage tree attempts _not_ to mimic anything realistic.
+ *
+ * The original purpose was to benchmark Mastodon project loaders API.
+ * This class is now only a legacy...
+ */
 public class NonSenseDataGenerator {
 	public NonSenseDataGenerator(final ProjectModel projectModel,
 	                             final int numberOfTimepoints,
