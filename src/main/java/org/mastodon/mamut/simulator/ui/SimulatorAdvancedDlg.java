@@ -12,35 +12,6 @@ import org.mastodon.mamut.simulator.SimulationConfig;
 @Plugin(type = Command.class)
 public class SimulatorAdvancedDlg implements Command {
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep1 = "----------- Simulation Debug Options -----------";
-
-	/* makes it not visible, yet settable from script or command line (not from GUI as Fiji won't show it)
-	@Parameter(description = "Spots labels can be either 'M' or can be encoding the lineage history, also optionally with debug hints _B,_W,_BW.",
-		choices = { "Lineage encoding labels (1aabba...)",
-		            "Prepend hints B_,W_,BW_ to encoding labels",
-		            "Append hints _B,_W,_BW to encoding labels",
-		            "Always 'M' (no lineage encoding)" })
-	*/
-	@Parameter(required = false, visibility = ItemVisibility.INVISIBLE)
-	String LABELS_NAMING_POLICY = "Lineage";
-
-	@Parameter(label = "Collect internal data:",
-	           description = "COLLECT_INTERNAL_DATA: Collect internal status info per every Agent. If not, may speed up the simulation as no extra data will be stored.")
-	boolean COLLECT_INTERNAL_DATA = Simulator.COLLECT_INTERNAL_DATA;
-
-	@Parameter(label = "Verbose debug outputs from agents:",
-	           description = "VERBOSE_AGENT_DEBUG: Prints a lot of data to understand decisions making of the agents.")
-	boolean VERBOSE_AGENT_DEBUG = Simulator.VERBOSE_AGENT_DEBUG;
-
-	@Parameter(label = "Verbose debug outputs from simulator:",
-	           description = "VERBOSE_SIMULATOR_DEBUG: Prints relative little reports about what the simulation framework was asked to do.")
-	boolean VERBOSE_SIMULATOR_DEBUG = Simulator.VERBOSE_SIMULATOR_DEBUG;
-
-	@Parameter(label = "Each time point, add centre spot of agents:",
-	           description = "CREATE_MASTODON_CENTER_SPOT: Produce a \"lineage\" that stays in the geometric centre of the generated data.")
-	boolean CREATE_MASTODON_CENTER_SPOT = Simulator.CREATE_MASTODON_CENTER_SPOT;
-
-	@Parameter(visibility = ItemVisibility.MESSAGE)
 	final String sep2a = "----------- Agent Spot Size -----------";
 
 	@Parameter(label = "Initial agent radius:",
@@ -99,6 +70,35 @@ public class SimulatorAdvancedDlg implements Command {
 	@Parameter(label = "Dozering time period:",
 	           description = "AGENT_DAUGHTERS_DOZERING_TIME_PERIOD: Number of time points during which newly divided agents push apart; in this period the daughters are influenced only by surrounding-and-overlapping agents, but the surrounding agents are influenced by these daughters normally (so the influence is asymmetrical).")
 	int AGENT_DAUGHTERS_DOZERING_TIME_PERIOD = Simulator.AGENT_DAUGHTERS_DOZERING_TIME_PERIOD;
+
+	@Parameter(visibility = ItemVisibility.MESSAGE)
+	final String sep1 = "----------- Simulation Debug Options -----------";
+
+	/* makes it not visible, yet settable from script or command line (not from GUI as Fiji won't show it)
+	@Parameter(description = "Spots labels can be either 'M' or can be encoding the lineage history, also optionally with debug hints _B,_W,_BW.",
+		choices = { "Lineage encoding labels (1aabba...)",
+		            "Prepend hints B_,W_,BW_ to encoding labels",
+		            "Append hints _B,_W,_BW to encoding labels",
+		            "Always 'M' (no lineage encoding)" })
+	*/
+	@Parameter(required = false, visibility = ItemVisibility.INVISIBLE)
+	String LABELS_NAMING_POLICY = "Lineage";
+
+	@Parameter(label = "Collect internal data:",
+			  description = "COLLECT_INTERNAL_DATA: Collect internal status info per every Agent. If not, may speed up the simulation as no extra data will be stored.")
+	boolean COLLECT_INTERNAL_DATA = Simulator.COLLECT_INTERNAL_DATA;
+
+	@Parameter(label = "Verbose debug outputs from agents:",
+			  description = "VERBOSE_AGENT_DEBUG: Prints a lot of data to understand decisions making of the agents.")
+	boolean VERBOSE_AGENT_DEBUG = Simulator.VERBOSE_AGENT_DEBUG;
+
+	@Parameter(label = "Verbose debug outputs from simulator:",
+			  description = "VERBOSE_SIMULATOR_DEBUG: Prints relative little reports about what the simulation framework was asked to do.")
+	boolean VERBOSE_SIMULATOR_DEBUG = Simulator.VERBOSE_SIMULATOR_DEBUG;
+
+	@Parameter(label = "Each time point, add centre spot of agents:",
+			  description = "CREATE_MASTODON_CENTER_SPOT: Produce a \"lineage\" that stays in the geometric centre of the generated data.")
+	boolean CREATE_MASTODON_CENTER_SPOT = Simulator.CREATE_MASTODON_CENTER_SPOT;
 
 	@Parameter
 	SimulatorMainDlg basicDialog = null;
