@@ -31,44 +31,49 @@ public class SimulatorMainDlg implements Command {
 	@Parameter(visibility = ItemVisibility.MESSAGE)
 	final String sep1 = "----------- Input -----------";
 
-	@Parameter(label = "How to start a simulation:",
-		choices = {"From scratch from the seeds, see below",
-		           "From the existing spots in the time point GIVEN below",
-		           "From the existing spots in the LAST non-empty time point"})
+	@Parameter(label = "Start simulation:",
+		choices = {"From scratch (seed new agents)",
+		           "From existing spots",
+		           "From the last populated time point"})
 	String initMode = "From scratch";
 
-	@Parameter(label = "From scratch: Number of seeds:", min="1")
+	@Parameter(label = "Number of seed agents:", min="1",
+	           description = "Used only if \"From scratch\" is selected above.")
 	short numCells = 2;
 
-	@Parameter(label = "From existing spots in this time point:", min="0")
+	@Parameter(label = "Use existing spots from time point:", min="0",
+	           description = "Used only if \"From existing spots\" is selected above.")
 	int existingSpotsAtTP = 0;
 
-	@Parameter(label = "Number of time points to be created:", min="1")
+	@Parameter(label = "Total number of time points to simulate:", min="1",
+	           description = "Defines simulation duration.")
 	int numTimepoints = 10;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
 	final String sep2 = "----------- Output -----------";
 
-	@Parameter(label = "Save snapshots at these time points, e.g. 10,20,30:", min="0")
+	@Parameter(label = "Save snapshot at time points:", min="0",
+	           description = "Comma-separated e.g. \"10,50,100\", or put \"don't save\".")
 	String snapShotsTPs = "don't save";
 
-	@Parameter(label = "Save snapshots into files based on this name: ")
+	@Parameter(label = "Save snapshot files with base name:",
+	           description = "Each snapshot will be saved as a separate .mastodon file with this base name + time point.")
 	String snapShotsPath = "/temp/snapshots.mastodon";
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
 	final String sep3 = "----------- Parameters -----------";
 
 	@Parameter(label = "Simulation dimensionality:",
-	           choices = {"Do full 3D",
-	                      "Restrict to XY",
-	                      "Restrict to XZ",
-	                      "Restrict to YZ"} )
-	String do2D = "Do full 3D";
+	           choices = {"Full 3D",
+	                      "Restricted to XY plane",
+	                      "Restricted to XZ plane",
+	                      "Restricted to YZ plane"} )
+	String do2D = "Full 3D";
 
-	@Parameter(label = "Show the advanced dialog:")
+	@Parameter(label = "Show advanced settings:")
 	boolean showAdvancedDlg = false;
 
-	@Parameter(label = "Show the progress bar:")
+	@Parameter(label = "Show progress bar:")
 	boolean showProgressBar = true;
 
 	@Parameter
@@ -101,10 +106,12 @@ public class SimulatorMainDlg implements Command {
 		else Simulator.AGENT_DO_2D_MOVES_ONLY = Agent2dMovesRestriction.NO_RESTRICTION;
 
 		Runner r;
-		if (initMode.startsWith("From the existing spots")) {
-			if (initMode.contains("LAST")) existingSpotsAtTP = -1;
+		if (!initMode.startsWith("From scratch")) {
+			//re-use existing spots
+			if (initMode.contains("the last")) existingSpotsAtTP = -1;
 			r = new Runner(projectModel, existingSpotsAtTP, numTimepoints);
 		} else {
+			//insert own seeds
 			r = new Runner(projectModel, numCells, numTimepoints);
 		}
 
