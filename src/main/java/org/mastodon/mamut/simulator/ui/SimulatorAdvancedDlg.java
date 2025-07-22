@@ -11,15 +11,21 @@ import org.mastodon.mamut.simulator.SimulationConfig;
 
 @Plugin(type = Command.class)
 public class SimulatorAdvancedDlg implements Command {
+	public static final String HEADER1 = "----------- Agent Spot Size -----------";
+	public static final String HEADER2 = "----------- Agents Mobility Parameters -----------";
+	public static final String HEADER3 = "----------- Agents Life-cycle Parameters -----------";
+	public static final String HEADER4 = "----------- Offspring Agents Settings -----------";
+	public static final String HEADER5 = "----------- Simulation Debug Options -----------";
+
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep2a = "----------- Agent Spot Size -----------";
+	final String sep1 = HEADER1;
 
 	@Parameter(label = "Initial agent radius:",
 	           description = "AGENT_INITIAL_RADIUS: Using this radius the new spots are introduced into the simulation.")
 	double AGENT_INITIAL_RADIUS = Simulator.AGENT_INITIAL_RADIUS;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep2 = "----------- Agents Mobility Parameters -----------";
+	final String sep2 = HEADER2;
 
 	@Parameter(label = "Look-around distance:",
 	           description = "AGENT_LOOK_AROUND_DISTANCE: How far an agent \"sees\" to explore nearby space, to consider nearby agents positions for its own development.")
@@ -38,7 +44,7 @@ public class SimulatorAdvancedDlg implements Command {
 	int AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE = Simulator.AGENT_NUMBER_OF_ATTEMPTS_TO_MAKE_A_MOVE;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep3 = "----------- Agents Life-cycle Parameters -----------";
+	final String sep3 = HEADER3;
 
 	@Parameter(label = "Average lifespan before division:",
 	           description = "AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION: The mean life span of an agent (cell). Shorter means divisions occurs more often. 15%-down-rounded of the lifespan is a period just prior a division when mother cell slows down.")
@@ -57,7 +63,7 @@ public class SimulatorAdvancedDlg implements Command {
 	double AGENT_MAX_VARIABILITY_OF_DIVISION_PLANES = Simulator.AGENT_MAX_VARIABILITY_OF_DIVISION_PLANES;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep3b = "----------- Offspring Agents Settings -----------";
+	final String sep4 = HEADER4;
 
 	@Parameter(label = "Initial distance after division:",
 	           description = "AGENT_DAUGHTERS_INITIAL_DISTANCE: Freshly \"born\" daughters are placed exactly this distance apart from one another.")
@@ -72,7 +78,7 @@ public class SimulatorAdvancedDlg implements Command {
 	int AGENT_DAUGHTERS_DOZERING_TIME_PERIOD = Simulator.AGENT_DAUGHTERS_DOZERING_TIME_PERIOD;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep1 = "----------- Simulation Debug Options -----------";
+	final String sep5 = HEADER5;
 
 	/* makes it not visible, yet settable from script or command line (not from GUI as Fiji won't show it)
 	@Parameter(description = "Spots labels can be either 'M' or can be encoding the lineage history, also optionally with debug hints _B,_W,_BW.",

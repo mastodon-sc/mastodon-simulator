@@ -25,11 +25,15 @@ import java.util.Set;
 
 @Plugin(type = Command.class)
 public class SimulatorMainDlg implements Command {
+	public static final String HEADER1 = "----------- Input -----------";
+	public static final String HEADER2 = "----------- Output -----------";
+	public static final String HEADER3 = "----------- Parameters -----------";
+
 	@Parameter
 	ProjectModel projectModel;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep1 = "----------- Input -----------";
+	final String sep1 = HEADER1;
 
 	@Parameter(label = "Start simulation:",
 		choices = {"From scratch (seed new agents)",
@@ -50,7 +54,7 @@ public class SimulatorMainDlg implements Command {
 	int numTimepoints = 10;
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep2 = "----------- Output -----------";
+	final String sep2 = HEADER2;
 
 	@Parameter(label = "Save snapshot at time points:", min="0",
 	           description = "Comma-separated e.g. \"10,50,100\", or put \"don't save\".")
@@ -61,7 +65,7 @@ public class SimulatorMainDlg implements Command {
 	String snapShotsPath = "/temp/snapshots.mastodon";
 
 	@Parameter(visibility = ItemVisibility.MESSAGE)
-	final String sep3 = "----------- Parameters -----------";
+	final String sep3 = HEADER3;
 
 	@Parameter(label = "Simulation dimensionality:",
 	           choices = {"Full 3D",
