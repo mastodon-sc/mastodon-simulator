@@ -1,5 +1,5 @@
 #@ Context ctx
-#@File initialMastodonProjectFile
+#@File initial_mastodon_project_file
 
 #@int fill_from_this_timepoint = 0
 #@int(value=7) spots_radius = 7
@@ -20,7 +20,7 @@ from org.mastodon.mamut.io import ProjectLoader
 from org.mastodon.mamut import MainWindow
 import math
 
-p = ProjectLoader.open(initialMastodonProjectFile.toString(), ctx)
+p = ProjectLoader.open(initial_mastodon_project_file.toString(), ctx)
 print("started, please wait...")
 
 pixel_data_dimensions = p.getSharedBdvData().getSpimData().getSequenceDescription().getViewSetups().get(0).getSize().dimensionsAsLongArray()
@@ -120,3 +120,4 @@ if add_centre_spot:
     print("done adding centre(s)")
 
 MainWindow(p).setVisible(True)
+

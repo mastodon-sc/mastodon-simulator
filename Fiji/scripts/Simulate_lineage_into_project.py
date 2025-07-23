@@ -49,7 +49,7 @@ no_of_cells = 10
 no_of_time_points = 80
 flag_that_agents_should_be_seeded = True
 
-# ...start the simulation (from time point = 0 which is an implicit setting in this API)
+# ...start the simulation (from the first available time point in the project)
 r = Runner(project_model, no_of_cells, no_of_time_points, flag_that_agents_should_be_seeded)
 r.changeConfigTo(sim_cfg)
 r.setPrintSettingsAsPythonCode(True)
@@ -64,7 +64,8 @@ r.run()
 # for example:
 sim_cfg.AGENT_DO_2D_MOVES_ONLY = Agent2dMovesRestriction.NO_RESTRICTION
 sim_cfg.AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION = int(sim_cfg.AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION * 1.5)
-# NB: the example above slows down the growth rate by 50%
+# NB: the example above slows down the growth rate by 50%, that exemplifies
+#     how to introduce a change in the population behaviour
 
 # Also a new length of the simulation run:
 no_of_time_points = 90
@@ -73,7 +74,7 @@ r = Runner(project_model, -1, no_of_time_points)
 r.changeConfigTo(sim_cfg)
 r.run()
 
-#... and this pattern can continue...
+# ...and this pattern can continue...
 
 # Note that the simulator will not save the created outcome, user must click
 # the "Save" menu item explicitly in the opened Mastodon app.
