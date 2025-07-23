@@ -1,6 +1,10 @@
 #@ File (label="Where to place reference projects:", style="directory") output_folder
 output_folder = output_folder.toString()
 
+# open the console to see the "textual progress bar"
+from ij import IJ
+IJ.run("Console", "")
+
 import urllib2
 import zipfile
 import os
