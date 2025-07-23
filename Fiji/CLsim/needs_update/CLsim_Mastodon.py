@@ -1,5 +1,5 @@
 #@Context ctx
-#@File initialMastodonProjectFile
+#@File initial_mastodon_project_file
 
 from org.mastodon.mamut import MainWindow
 from org.mastodon.mamut.io import ProjectLoader
@@ -9,8 +9,8 @@ from org.mastodon.mamut.simulator import AgentNamingPolicy
 from org.mastodon.mamut.simulator import Agent2dMovesRestriction
 
 # Loads the Mastodon project and shows the Mastodon app.
-projectModel = ProjectLoader.open(initialMastodonProjectFile.toString(), ctx, True, True)
-MainWindow(projectModel).setVisible(True)
+project_model = ProjectLoader.open(initial_mastodon_project_file.toString(), ctx, True, True)
+MainWindow(project_model).setVisible(True)
 
 # Possibly adjusts the simulation configuration from the default configuration.
 # (This is an optional step.)
@@ -42,11 +42,11 @@ sim_cfg.AGENT_DO_2D_MOVES_ONLY = Agent2dMovesRestriction.NO_Z_AXIS_MOVE  #does 2
 # Now, let's simulate into the just-opened Mastodon app, assuming the loaded
 # project is empty and thus:
 # ...provide own number of cells and length of this simulation run
-noOfCells = 10
-noOfTimepoints = 80
+no_of_cells = 10
+no_of_time_points = 80
 
 # ...start the simulation (from time point = 0 which is an implicit setting in this API)
-r = Runner(projectModel, noOfCells, noOfTimepoints)
+r = Runner(project_model, no_of_cells, no_of_time_points)
 r.changeConfigTo(sim_cfg)
 r.run()
 
@@ -62,9 +62,9 @@ sim_cfg.AGENT_AVERAGE_LIFESPAN_BEFORE_DIVISION = int(sim_cfg.AGENT_AVERAGE_LIFES
 # NB: the example above slows down the growth rate by 50%
 
 # Also a new length of the simulation run:
-noOfTimepoints = 90
+no_of_time_points = 90
 
-r = Runner(projectModel, -1, noOfTimepoints)
+r = Runner(project_model, -1, no_of_time_points)
 r.changeConfigTo(sim_cfg)
 r.run()
 
