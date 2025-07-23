@@ -7,7 +7,7 @@ import os
 
 project1 = 'reference_empty_dummydata.mastodon'
 project2 = 'reference_empty_pixeldata.zip'
-base_url = 'https://raw.githubusercontent.com/mastodon-sc/mastodon-simulator/refs/heads/code_and_menus_shuffle/Fiji/project_files/'
+base_url = 'https://raw.githubusercontent.com/mastodon-sc/mastodon-simulator/refs/heads/main/Fiji/project_files/'
 
 def download_plain_file(input_url, output_file_str):
     with open(output_file_str,'wb') as f:
@@ -33,4 +33,5 @@ print "Downloaded to "+zip_file_path
 print "Unzipping..."
 unzip_file_to_its_containing_folder(zip_file_path)
 print "Unzipped to "+output_folder
+print "done."
 
