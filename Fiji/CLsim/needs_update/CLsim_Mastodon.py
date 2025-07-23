@@ -36,6 +36,9 @@ sim_cfg.AGENT_DO_2D_MOVES_ONLY = Agent2dMovesRestriction.NO_Z_AXIS_MOVE  #does 2
 # For a complete list, refer to the Java source code in the file:
 # repository/src/main/java/org/mastodon/mamut/simulator/Simulator.java
 # lines 23 till 72, the beginning of the class Simulator
+
+# It is also possible to have the current configuration printed as Python
+# code, ready for cut&paste... see below r.setPrintSettingsAsPythonCode()
 # --------------------- own configuration ---------------------
 
 
@@ -49,6 +52,7 @@ flag_that_agents_should_be_seeded = True
 # ...start the simulation (from time point = 0 which is an implicit setting in this API)
 r = Runner(project_model, no_of_cells, no_of_time_points, flag_that_agents_should_be_seeded)
 r.changeConfigTo(sim_cfg)
+r.setPrintSettingsAsPythonCode(True)
 r.run()
 
 
