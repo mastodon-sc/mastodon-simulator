@@ -1,5 +1,5 @@
 #@ Context ctx
-#@File initialMastodonProjectFile
+#@File initial_mastodon_project_file
 
 #@int start_in_this_timepoint = 0
 #@int advance_timepoint_after_this_number_of_spots = 10000
@@ -28,7 +28,7 @@ from org.mastodon.mamut import MainWindow
 import random
 import math
 
-p = ProjectLoader.open(initialMastodonProjectFile.toString(), ctx)
+p = ProjectLoader.open(initial_mastodon_project_file.toString(), ctx)
 print("started, please wait...")
 
 tagMap = None
@@ -83,3 +83,4 @@ for x in range(-x_num_steps, x_num_steps+1):
 
 print("done adding spots")
 MainWindow(p).setVisible(True)
+
