@@ -44,9 +44,10 @@ sim_cfg.AGENT_DO_2D_MOVES_ONLY = Agent2dMovesRestriction.NO_Z_AXIS_MOVE  #does 2
 # ...provide own number of cells and length of this simulation run
 no_of_cells = 10
 no_of_time_points = 80
+flag_that_agents_should_be_seeded = True
 
 # ...start the simulation (from time point = 0 which is an implicit setting in this API)
-r = Runner(project_model, no_of_cells, no_of_time_points)
+r = Runner(project_model, no_of_cells, no_of_time_points, flag_that_agents_should_be_seeded)
 r.changeConfigTo(sim_cfg)
 r.run()
 

@@ -28,6 +28,17 @@ public class Runner implements Runnable {
 	/** Provides a brief report about how this Runner has been started (created). */
 	private final String startupCommentary;
 
+	/** !! only a wrapper of the c'tor below !!
+	 * It was made available because of Fiji's Jython-to-Java conversion that
+	 * confuses shorts and ints... the ProjectModel,short,int and ProjectModel,int,int
+	 * signatures are seen as the same for Jython. */
+	public Runner(final ProjectModel projectModel,
+	              final short numberOfCells,
+	              final int timepoints,
+	              final boolean ignoredBoolean) {
+		this(projectModel, numberOfCells, timepoints);
+	}
+
 	/** intended for when full Mastodon is around, starts from the beginning */
 	public Runner(final ProjectModel projectModel,
 	              final short numberOfCells,
