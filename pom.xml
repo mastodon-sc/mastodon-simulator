@@ -10,7 +10,7 @@
 
 	<groupId>org.mastodon</groupId>
 	<artifactId>mastodon-simulator</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<name>Mastodon Simulator</name>
 	<description>A cell population growth simulator to test Mastodon limits.</description>
@@ -71,7 +71,7 @@
 		<license.organizationName>Mastodon authors</license.organizationName>
 		<license.copyrightOwners>Vladimir Ulman</license.copyrightOwners>
 
-		<mastodon.version>1.0.0-beta-34-SNAPSHOT</mastodon.version>
+		<mastodon.version>1.0.0-beta-34</mastodon.version>
 	</properties>
 
 	<developers>
